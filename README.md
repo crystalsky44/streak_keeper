@@ -1,1 +1,2 @@
-My First Ever Software\nGoal: To keep track of tasks from CLI
+My First Ever Software
+Goal: To keep track of tasks from CLI
