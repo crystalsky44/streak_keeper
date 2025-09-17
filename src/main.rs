@@ -1,23 +1,33 @@
 use std::io;
+use std::io::Write;
 
 fn main() {
-    println!("Please input your task: ");
-
+    print!("Please input your task: ");
+    io::stdout().flush().expect("just_for_test");
     let mut input = String::new();
-
-    let test_usize: usize = io::stdin().read_line(&mut input)
+    io::stdin().read_line(&mut input)
         .expect("Task title is required to add task");
 
+    while input.trim().is_empty() {
+        print!("Input is empty!\nPlease input your task: ");
+        io::stdout().flush().expect("just_for_test");
+        io::stdin().read_line(&mut input)
+            .expect("Task title is required to add task");
+    } 
+
     println!("Task added: {}", input.trim());
-    println!("test_my_knowledge: {}", test_usize);
+    
 }
 
-/*
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn input_test() {
-        let task_title = 
-*/
+        let task_title = String::from("\n");
+
+        assert_eq!(task_title.trim(), "");
+    }
+}
