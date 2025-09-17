@@ -5,10 +5,11 @@ fn main() {
 
     let mut input = String::new();
 
-    io::stdin().read_line(&mut input)
+    let test_usize: usize = io::stdin().read_line(&mut input)
         .expect("Task title is required to add task");
 
     println!("Task added: {}", input.trim());
+    println!("test_my_knowledge: {}", test_usize);
 }
 
 /*
