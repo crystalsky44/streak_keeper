@@ -47,9 +47,11 @@ fn run() -> Task {
         .read_line(&mut input_detail)
         .expect("Task title is required to add task");
 
-    // until there is an input
+   // until there is an input
     while input_detail.trim().is_empty() {
-        print!("Input is empty!\nPlease input your task: ");
+        input_detail.clear();
+
+        print!("Input is empty!\nPlease input your task detail: ");
         io::stdout()
             .flush()
             .expect("just_for_test");
@@ -58,7 +60,15 @@ fn run() -> Task {
         io::stdin()
             .read_line(&mut input_detail)
             .expect("Task title is required to add task");
+
+        input_detail = String::from(input_detail.trim());
+
     } 
+
+    for x in input_detail.chars().into_iter() {
+        let code = x as u32;
+        println!("U+{:04x}", code);
+    }
 
     let task_0 = Task {
      task_title: input_title,
