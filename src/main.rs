@@ -7,35 +7,14 @@ fn main() {
     let task_0 = run();
     
     println!("\n++Your task++");
-    print!("Title: {}Detail: {}", task_0.task_title, task_0.task_detail);
+    print!("Title: {}\nDetail: {}", task_0.task_title, task_0.task_detail);
 }
 
 fn run() -> Task {
-    let mut input_title = String::new();
-    let mut input_detail = String::new();
-    
-    print!("Please input your task: ");
-    io::stdout()
-        .flush()
-        .expect("just_for_test");
-    // awake input
-    io::stdin()
-        .read_line(&mut input_title)
-        .expect("Task title is required to add task");
-
-    // until there is an input
-    while input_title.trim().is_empty() {
-        print!("Input is empty!\nPlease input your task: ");
-        io::stdout()
-            .flush()
-            .expect("just_for_test");
-
-        // awake input
-        io::stdin()
-            .read_line(&mut input_title)
-            .expect("Task title is required to add task");
-    } 
-
+    let task = Task::new();
+    task
+}
+    /*
     // writing down the same code just to not think about it for now
 
     print!("Please input your task detail: ");
@@ -76,20 +55,53 @@ fn run() -> Task {
     };
 
     task_0
-
-}
+    */
 
 struct Task {
     task_title: String,
     task_detail: String,
 }
  
-/*
 impl Task {
-    fn create(title: &String) -> Task {
+    fn new() -> Task {
+        print!("Please input your task title: ");
+        let input_title = Self::input("title".to_string());
 
+        print!("Please input your task detail: ");
+        let input_detail = Self::input("detail".to_string());
+
+        let task_0 = Task {
+            task_title: input_title,
+            task_detail: input_detail,
+        };
+
+        task_0
+ 
+    }
+    
+    fn input(data_name: String) -> String {
+        let mut input = String::new();
+
+        while input.is_empty() {
+            // flush output
+            io::stdout()
+                .flush()
+                .expect("just_for_test");
+
+            io::stdin()
+                .read_line(&mut input)
+                .expect("Task title is required to add task {data_name}");
+
+            if input.trim().is_empty() {
+                input.clear();
+                print!("Input is empty!\n\nPlease input your task {data_name}: ");
+            } else {
+                input = input.trim().to_string();
+            }
+        }
+        input
+    }
 }
-*/
 
 #[cfg(test)]
 mod tests {
