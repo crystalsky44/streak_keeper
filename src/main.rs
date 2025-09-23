@@ -1,26 +1,10 @@
 use std::{io, io::Write};
 
 fn main() {
-    let task_0 = run();
+    let task_0 = Task::new();
     
     println!("\n++Your task++");
     print!("Title: {}\nDetail: {}", task_0.task_title, task_0.task_detail);
-}
-
-fn run() -> Task {
-    let task = Task::new();
-    task
-}
-
-fn keyboard_input(input: &mut String) -> () {
-    // flush output
-    io::stdout()
-        .flush()
-        .expect("just_for_test");
-
-    io::stdin()
-        .read_line(input)
-        .expect("Task title is required to add task {data_name}");
 }
 
 struct Task {
@@ -34,21 +18,23 @@ impl Task {
         let mut input_detail;
 
         print!("Please input your task title: ");
-        input_title = Self::input("title".to_string());
+        input_title = Self::input(1);
 
-        loop {
+        'task_detail: loop {
             print!("Please input your task detail: ");
-            input_detail = Self::input("detail".to_string());
+            input_detail = Self::input(2);
 
             if input_detail.is_empty() {
                 println!("\nDo you want to store the task without detail? (y/n)");
-                let mut yes_no = String::new();
-                keyboard_input(&mut yes_no);
+                loop {
+                    let mut yes_no = String::new();
+                    keyboard_input(&mut yes_no);
 
-                match yes_no.to_lowercase().trim() {
-                   "y" => break,
-                   "n" => continue,
-                   _ => { println!("Please type either 'y' or 'n'"); continue },
+                    match yes_no.to_lowercase().trim() {
+                       "y" => break 'task_detail,
+                       "n" => break,
+                       _ => { println!("Please type either 'y' or 'n'"); continue },
+                    }
                 }
             } else {
                 break;
@@ -64,24 +50,35 @@ impl Task {
  
     }
     
-    fn input(data_name: String) -> String {
+    fn input(task_field: i32) -> String {
         let mut input = String::new();
 
         while input.is_empty() {
             keyboard_input(&mut input);
 
-            if input.trim().is_empty() && data_name == "detail" {
+            if input.trim().is_empty() && task_field == 2 {
                 input.clear();
                 break;
             } else if input.trim().is_empty() {
                 input.clear();
-                print!("Input is empty!\n\nPlease input your task {data_name}: ");
+                print!("Input is empty!\n\nPlease input your task title: ");
             } else {
                 input = input.trim().to_string();
             }
         }
         input
     }
+}
+
+fn keyboard_input(input: &mut String) -> () {
+    // flush output
+    io::stdout()
+        .flush()
+        .expect("just_for_test");
+
+    io::stdin()
+        .read_line(input)
+        .expect("Task title is required to add task {data_name}");
 }
 
 #[cfg(test)]
