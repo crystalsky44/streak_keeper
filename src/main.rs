@@ -1,7 +1,4 @@
-use std::io;
-use std::io::Write;
-
-
+use std::{io, io::Write};
 
 fn main() {
     let task_0 = run();
@@ -15,6 +12,17 @@ fn run() -> Task {
     task
 }
 
+fn keyboard_input(input: &mut String) -> () {
+    // flush output
+    io::stdout()
+        .flush()
+        .expect("just_for_test");
+
+    io::stdin()
+        .read_line(input)
+        .expect("Task title is required to add task {data_name}");
+}
+
 struct Task {
     task_title: String,
     task_detail: String,
@@ -22,11 +30,30 @@ struct Task {
  
 impl Task {
     fn new() -> Task {
-        print!("Please input your task title: ");
-        let input_title = Self::input("title".to_string());
+        let input_title;
+        let mut input_detail;
 
-        print!("Please input your task detail: ");
-        let input_detail = Self::input("detail".to_string());
+        print!("Please input your task title: ");
+        input_title = Self::input("title".to_string());
+
+        loop {
+            print!("Please input your task detail: ");
+            input_detail = Self::input("detail".to_string());
+
+            if input_detail.is_empty() {
+                println!("\nDo you want to store the task without detail? (y/n)");
+                let mut yes_no = String::new();
+                keyboard_input(&mut yes_no);
+
+                match yes_no.to_lowercase().trim() {
+                   "y" => break,
+                   "n" => continue,
+                   _ => { println!("Please type either 'y' or 'n'"); continue },
+                }
+            } else {
+                break;
+            }
+        }
 
         let task_0 = Task {
             task_title: input_title,
@@ -41,16 +68,12 @@ impl Task {
         let mut input = String::new();
 
         while input.is_empty() {
-            // flush output
-            io::stdout()
-                .flush()
-                .expect("just_for_test");
+            keyboard_input(&mut input);
 
-            io::stdin()
-                .read_line(&mut input)
-                .expect("Task title is required to add task {data_name}");
-
-            if input.trim().is_empty() {
+            if input.trim().is_empty() && data_name == "detail" {
+                input.clear();
+                break;
+            } else if input.trim().is_empty() {
                 input.clear();
                 print!("Input is empty!\n\nPlease input your task {data_name}: ");
             } else {
