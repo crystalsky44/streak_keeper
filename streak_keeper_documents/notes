@@ -1,0 +1,85 @@
+09-09-2025
+Now I know why I'm going to make, how to realize that (listed functions), not
+what do I do? At what point, or what should I be prepared before I actually
+start coding?
+
+-things that comes to mind
+    a. algorithm design
+    b. data structure design
+    c. visualize how the function will be used by the users
+
+++notes
+- remember, other users are likely not to have the same cli 
+  (font, display size, etc.)
+
+- haven't thought a lot, but I need to design the database as well
+
+fn to_do() {
+    // below are the sub functions the comprises the to_do function
+    // a. write down the tasks
+    // b. display the tasks
+    // c. mark down the tasks 'done'
+    //
+    // below are screen, use image of to_do function
+    // 
+    // --writing down tasks
+    // strk write 'task_0'
+    //
+    // --displaying the tasks
+    // strk show tasks
+    //
+    // ==outputs==
+    // |Your Tasks|
+    //  |- task_0
+    //  |- task_1
+    //  |- task_2
+    //
+    // --marking down tasks
+    // strk done 'task_0'  
+    //
+    // [marking down by task number]
+    // strk done --task 1
+
+}
+
+09-11-2025
+rep_0:
+had some ideas on data structure of the product.
+But, when can I say "I'm done designing the data structure"?
+Search for example process of data structure design
+
+rep_1:
+searching for general process to design a data structure
+
+rep_2:
+the I've looked into several web pages and documents and all I find after
+defining the problem, or the purpose, comes choosing design structure
+since I've use up 25 x 3 minutes on finding the process to design a
+data structure, I will go on to next for now. I'll come back later
+next is: set objective for iteration_1
+
+rep_3:
+wondering how to organize the objective of iteration_1 (or maybe iterations)
+let's go back to Agile Samurai if I can find any hints for it
+
+
+09-12-2025
+rep_0_plan: what's the objective, or the goal of iteration 1?
+
+[master story list]
+quote from Agile Samurai:
+"The master story list is a collection of user stories (features) your customer
+is going to want to see in their software"
+
+first, I don't have this, "Master Story List"
+I have big ideas, but haven't broken down to list of "features"
+
+some key words found in "Agile Samurai"
+- Define Your Release
+  a release is a logical grouping of stories that make sense to your customer
+  --something worth bunding up and deploying. It's also sometimes referred to as
+  [mininal feature set (or MMF)]
+
+am already in rep_1, but this is the plan
+create a [master story list] and define what my MMF will be for iteration_0
+
