@@ -2,16 +2,19 @@ use std::{io, io::Write};
 
 fn main() {
     let task_0 = Task::new();
-    
+
     println!("\n++Your task++");
-    print!("Title: {}\nDetail: {}", task_0.task_title, task_0.task_detail);
+    print!(
+        "Title: {}\nDetail: {}",
+        task_0.task_title, task_0.task_detail
+    );
 }
 
 struct Task {
     task_title: String,
     task_detail: String,
 }
- 
+
 impl Task {
     fn new() -> Task {
         let input_title;
@@ -31,9 +34,12 @@ impl Task {
                     keyboard_input(&mut yes_no);
 
                     match yes_no.to_lowercase().trim() {
-                       "y" => break 'task_detail,
-                       "n" => break,
-                       _ => { println!("Please type either 'y' or 'n'"); continue },
+                        "y" => break 'task_detail,
+                        "n" => break,
+                        _ => {
+                            println!("Please type either 'y' or 'n'");
+                            continue;
+                        }
                     }
                 }
             } else {
@@ -47,9 +53,8 @@ impl Task {
         };
 
         task_0
- 
     }
-    
+
     fn input(task_field: i32) -> String {
         let mut input = String::new();
 
@@ -72,9 +77,7 @@ impl Task {
 
 fn keyboard_input(input: &mut String) -> () {
     // flush output
-    io::stdout()
-        .flush()
-        .expect("just_for_test");
+    io::stdout().flush().expect("just_for_test");
 
     io::stdin()
         .read_line(input)
